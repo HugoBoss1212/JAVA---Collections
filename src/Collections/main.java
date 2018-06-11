@@ -1,4 +1,6 @@
 package Collections;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 public class main {
@@ -16,7 +18,7 @@ public class main {
             return imie;
         }
 
-        public String getNazwisko() {
+        String getNazwisko() {
             return nazwisko;
         }
 
@@ -27,21 +29,30 @@ public class main {
 
         @Override
         public int compareTo(Osoba o) {
-            if (o.getImie().compareTo(imie) < 0) return 1;
-            if (o.getImie().compareTo(imie) > 0) return -1;
-            return 0;
+            if (o.getImie().compareTo(this.imie) < 0) return 1;
+            else if (o.getImie().compareTo(this.imie) > 0) return -1;
+            else{
+                if (o.getNazwisko().compareTo(this.nazwisko) < 0) return 1;
+                else if (o.getNazwisko().compareTo(this.nazwisko) > 0) return -1;
+                return 0;
+            }
         }
     }
 
     public static void main(String[] args) {
 
 //--------------------PriorityQueue-------------------
+        //kolekcja pozwalająca na szybkie usunięcie
+        //najmniejszego elementu. W momencie dodawania elementu jest on
+        //od razu ustawiany zgodnie z priorytetem.
         System.out.println("\n//--------------------PriorityQueue-------------------");
         Osoba o1 = new Osoba("Jan", "Kowalski");
         Osoba o2 = new Osoba("Alicja", "Rys");
+        Osoba o3 = new Osoba("Bartek", "Jechowicz");
         PriorityQueue<Osoba> pq = new PriorityQueue<>();
         pq.add(o1);
         pq.add(o2);
+        pq.add(o3);
         for (Object aPq : pq) {
             System.out.println(aPq);
         }
@@ -62,6 +73,7 @@ public class main {
         lista.addAll(lista2);
         lista.remove("Tomek");
         lista.remove(1);
+        System.out.println("----------zwykła--------------\n" + lista);
         Collections.reverse(lista);
         System.out.println("----------odwrócenie--------------\n" + lista);
         Collections.sort(lista);
@@ -86,13 +98,15 @@ public class main {
 
 
 //----------------------------LinkdedList---------------------------------------------
+        //lista pozwalająca na szybkie wstawianie i usuwanie elementów
         System.out.println("\n//-------------------LinkdedList------------------------");
         List <Integer> ll = new LinkedList<>(Arrays.asList(1,3,5,7,9));
         System.out.println(ll);
-        ll.add(1,2); //wstawienie na pozycji 1 elementu "2"
+        ll.add(1,2); //wstawienie na pozycji 1 elementu "2" pozostałe przesunie +1
         System.out.println(ll);
 
 //------------------------HashSet--------------------------
+        //zbiór, w którym wszystkie obiekty są unikatowe. Nie jest w nim zachowywana kolejność
         System.out.println("\n//-------------------HashSet------------------------");
         Set <String> hs = new HashSet<>();
         hs.add("maslo");
@@ -102,6 +116,9 @@ public class main {
         //add, contains, remove
 
 //--------------------TreeSet--------------------------------
+        //zbiór, w którym bez względu na to, kiedy zostanie dodany
+        //element jest zachowywana kolejność (TreeSet automatycznie
+        //sortuje elementy)
         System.out.println("\n//-------------------TreeSet------------------------");
         Set<String> ts = new TreeSet<>();
         ts.add("python");
@@ -121,8 +138,8 @@ public class main {
             System.out.println(klucz + " : "+hm.get(klucz));
         }
 
-//-----------------------Queue-------------------------------------------
-        System.out.println("\n//-------------------Queue------------------------");
+//-----------------------Dequeue-------------------------------------------
+        System.out.println("\n//-------------------Dequeue------------------------");
         ArrayDeque<String> ad = new ArrayDeque<>(Arrays.asList("jesc", "pic", "spac"));
 
         ad.addFirst("cpac");
@@ -135,7 +152,8 @@ public class main {
             System.out.println(ad);
         }
         catch (NullPointerException | NoSuchElementException e ){System.err.println(e);}
-        //bez wyjatkow offer, poll, peek //LIFO = addFirst and removeFirst
+        //bez wyjatkow offer, poll, peek
+        // LIFO = addFirst and removeFirst
     }
 
 }
