@@ -7,12 +7,12 @@ public class main {
         private String imie;
         private String nazwisko;
 
-        public Osoba(String imie, String nazwisko) {
+        Osoba(String imie, String nazwisko) {
             this.imie = imie;
             this.nazwisko = nazwisko;
         }
 
-        public String getImie() {
+        String getImie() {
             return imie;
         }
 
@@ -36,17 +36,19 @@ public class main {
     public static void main(String[] args) {
 
 //--------------------PriorityQueue-------------------
+        System.out.println("\n//--------------------PriorityQueue-------------------");
         Osoba o1 = new Osoba("Jan", "Kowalski");
         Osoba o2 = new Osoba("Alicja", "Rys");
         PriorityQueue<Osoba> pq = new PriorityQueue<>();
         pq.add(o1);
         pq.add(o2);
-        Iterator it1 = pq.iterator();
-        while (it1.hasNext()){
-            System.out.println(it1.next());
+        for (Object aPq : pq) {
+            System.out.println(aPq);
         }
 
+
 //-------------------ArrayList------------------------
+        System.out.println("\n//-------------------ArrayList------------------------");
         //szybki dostep do elementow // usuwanie i wstawianie nowych elementow malo efektywne
         List<String> lista = new ArrayList<>(Arrays.asList("Sylwek", "Tomek"));
         System.out.println(lista.size());
@@ -68,29 +70,30 @@ public class main {
         //lista.clear(); --- czyszczenie listy
 
         // ----------------ITERATORY---------------------------------------------
-        System.out.println("-------------------Lista iterowana-------------------");
-        Iterator it = lista.iterator();
-        while (it.hasNext()){
-            System.out.println("Imie: " + it.next());
+        System.out.println("\n//-------------------Lista iterowana-------------------");
+        for (Object aLista : lista) {
+            System.out.println("Imie: " + aLista);
         }
-        System.out.println("-------------------Lista iterowana od tylu------------");
+        System.out.println("\n//-------------------Lista iterowana od tylu------------");
         ListIterator lIt = lista.listIterator(lista.size());
         while (lIt.hasPrevious()){
             System.out.println("imie: " + lIt.previous());
         }
-        System.out.println("------------------for-each-iterowanie-----------------");
+        System.out.println("\n//------------------for-each-iterowanie-----------------");
         for (String element: lista){
             System.out.println(element);
         }
 
 
 //----------------------------LinkdedList---------------------------------------------
+        System.out.println("\n//-------------------LinkdedList------------------------");
         List <Integer> ll = new LinkedList<>(Arrays.asList(1,3,5,7,9));
         System.out.println(ll);
         ll.add(1,2); //wstawienie na pozycji 1 elementu "2"
         System.out.println(ll);
 
 //------------------------HashSet--------------------------
+        System.out.println("\n//-------------------HashSet------------------------");
         Set <String> hs = new HashSet<>();
         hs.add("maslo");
         hs.add("maslo");
@@ -99,6 +102,7 @@ public class main {
         //add, contains, remove
 
 //--------------------TreeSet--------------------------------
+        System.out.println("\n//-------------------TreeSet------------------------");
         Set<String> ts = new TreeSet<>();
         ts.add("python");
         ts.add("java");
@@ -106,6 +110,7 @@ public class main {
         //automatyczne sortowanie, add, remove,
 
 //-------------------hashMap--------------------------------
+        System.out.println("\n//-------------------hashMap------------------------");
         Map<String, Integer> hm = new HashMap<>();
         hm.put("batonik", 2);
         hm.put("cola", 1);
@@ -116,7 +121,8 @@ public class main {
             System.out.println(klucz + " : "+hm.get(klucz));
         }
 
-//-----------------------kolejka-------------------------------------------
+//-----------------------Queue-------------------------------------------
+        System.out.println("\n//-------------------Queue------------------------");
         ArrayDeque<String> ad = new ArrayDeque<>(Arrays.asList("jesc", "pic", "spac"));
 
         ad.addFirst("cpac");
@@ -128,8 +134,7 @@ public class main {
             System.out.println(ad.removeLast());
             System.out.println(ad);
         }
-        catch (NullPointerException e ){System.err.println(e);}
-        catch (NoSuchElementException e) {System.err.println(e);}
+        catch (NullPointerException | NoSuchElementException e ){System.err.println(e);}
         //bez wyjatkow offer, poll, peek //LIFO = addFirst and removeFirst
     }
 
